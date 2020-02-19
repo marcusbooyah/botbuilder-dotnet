@@ -1,0 +1,81 @@
+﻿# ?I need help
+```markdown
+Sure happy to help
+```
+
+# ?tell joke
+- tell me a joke
+- can you make me laugh?
+
+**filters:**
+- dialogname=rootdialog
+
+```markdown
+    ha ha ha
+```
+
+# ?user guide
+**filters:**
+- dialogname=rootdialog
+
+```markdown
+    Here is the [user guide](http://contoso.com/userguide.pdf)
+```
+
+# ?book flight
+**filters:**
+- dialogname=rootdialog
+
+# ?sing song
+- can you sing a song
+- make some tunes
+
+```markdown
+    Sure, I can help with that.
+```
+
+**filters:**
+- dialogname=rootdialog
+
+```markdown
+    la la la
+```
+
+# ?buy mango
+
+**filters:**
+- dialogname=rootdialog
+
+> Source:cross training. Please do not edit these directly!
+# ?hi
+- hello
+- good morning
+- how are you?
+- I need help
+- What can you do? 
+- Can you please help
+- I'm not sure what I can say
+- I'm stuck
+- reset profile
+- forget me
+- delete my profile
+- please erase everything you know about me
+- Please stop that
+- Cancel
+- I do not wish to do that anymore
+- I changed my mind
+- Abort
+- Don't do it
+- please cancel that
+- Provide information about me
+- Get started
+- Start
+- Please start
+- let's get started
+
+**filters:**
+- dialogname=rootdialog
+
+```markdown
+intent=DeferToRecognizer_Root_LUIS
+```

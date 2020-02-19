@@ -1,0 +1,157 @@
+﻿> new disambiguation card
+# chooseIntentResponseWithCard
+[Activity
+    Attachments = ${json(chooseIntentAdaptiveCard())}
+]
+
+# chooseIntentAdaptiveCard
+- ```
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0",
+    "type": "AdaptiveCard",
+    "speak": "",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "${whichOneDidYouMean()}",
+            "weight": "Bolder"
+        },
+        {
+            "type": "TextBlock",
+            "text": "${pickOne()}",
+            "separator": true
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "placeholder": "Placeholder text",
+            "id": "userChosenIntent",
+            "choices": [
+                {
+                    "title": "${getIntentReadBack()}",
+                    "value": "luisResult"
+                },
+                {
+                    "title": "${getAnswerReadBack()}",
+                    "value": "qnaResult"
+                },
+                {
+                    "title": "None of the above",
+                    "value": "none"
+                }
+            ],
+            "style": "expanded",
+            "value": "luis"
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.Submit",
+                    "title": "Submit",
+                    "data": {
+                        "intent": "chooseIntentCardResponse"
+                    }
+                }
+            ]
+        }
+    ]
+}
+```
+
+
+# chooseIntentResponseWithSuggestedAction
+[Activity
+    Text = ${whichOneDidYouMean()} ${pickOne()}
+    SuggestedActions = ${getIntentReadBack()} | ${getAnswerReadBack()} | ${noneOfTheChoices()}
+]
+
+# noneOfTheChoices
+- Neither
+- Not either
+- None
+
+# getIntentReadBack
+- SWITCH : ${toLower(dialog.luisResult.intent)}
+- CASE : ${'help'}
+    - Escalate to a human
+- DEFAULT :
+    - ${dialog.luisResult.intent}
+
+# getAnswerReadBack
+- See answer from KB
+
+# pickOne
+- Can you pick one?
+- Can you help clarify by choosing one?
+
+# whichOneDidYouMean
+- I'm not sure which one you mean.
+- Hmmm, I find that to be ambiguous.
+
+# getRecResultReadBack(key,value)
+- SWITCH : ${key}
+- CASE : ${'Root_LUIS'}
+    - ${first(foreach(value.intents, x, x.key))}
+- CASE : ${'Root_QnA'}
+    - ${first(foreach(value.intents, x, x.key))}
+- DEFAULT :
+    - None of the above
+
+> everything else.
+
+# GreetingReply
+[Activity
+    Text = Hi there! I'm a demo bot! Nice to meet you. 
+    SuggestedActions = ${createArray('Get started', 'Cancel')}
+]
+
+# GlobalHelp
+- Sure thing. Happy to help. This is global help and just saying - 'I'm just a demo bot'
+
+# ResetProfile
+- Sure. I've reset your profile.
+
+# Cancel
+- Sure. I've cancelled that.
+
+# WelcomeUser
+[Activity
+    Text = ${testConditional()}
+    SuggestedActions = Start
+]
+
+# testConditional
+- IF : ${user.name}
+    - Not supposed to be here.
+- ELSE : 
+    - Hello, I'm a demo bot!! 
+
+# GreetUser
+- OK ${RandName()}, let's start again. \[Rand\]
+- Ok ${RandName()}, let's start over. \[Rand\]
+- No problem, let's start again.
+- Done, let's start over.
+- Sure thing ${RandName()}, we can start over. \[Rand\]
+
+# RandName 
+- IF: ${user.name && rand(0, 1000) > 1}
+    - ${concat(' ', CapitalizeFirstLetter(user.name))}
+- ELSE:
+    - 
+
+# CapitalizeFirstLetter(name) 
+- ${concat(toUpper(substring(name, 0, 1)), substring(name, 1))}
+
+
+# renderDisambiguationChoices (collection)
+- ${join(foreach(collection, item, renderChoiceAsListItem(item)), '\n- ')}
+
+# renderChoiceAsListItem (item)
+- intent : ${item.intent}
+
+# ShowMultiTurnAnswer
+[Activity
+    Text = ${@answer}
+    SuggestedActions = ${foreach(turn.recognized.answers[0].context.prompts, x, x.displayText)}
+]

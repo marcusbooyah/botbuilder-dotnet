@@ -1,0 +1,160 @@
+{
+  "intents": [
+    {
+      "name": "Greeting"
+    },
+    {
+      "name": "Help"
+    },
+    {
+      "name": "ResetProfile"
+    },
+    {
+      "name": "Cancel"
+    },
+    {
+      "name": "UserProfile"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "closedLists": [],
+  "regex_entities": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "hi",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "good morning",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "how are you?",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "I need help",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "What can you do?",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "Can you please help",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "I'm not sure what I can say",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "I'm stuck",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "reset profile",
+      "intent": "ResetProfile",
+      "entities": []
+    },
+    {
+      "text": "forget me",
+      "intent": "ResetProfile",
+      "entities": []
+    },
+    {
+      "text": "delete my profile",
+      "intent": "ResetProfile",
+      "entities": []
+    },
+    {
+      "text": "please erase everything you know about me",
+      "intent": "ResetProfile",
+      "entities": []
+    },
+    {
+      "text": "Please stop that",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "Cancel",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "I do not wish to do that anymore",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "I changed my mind",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "Abort",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "Don't do it",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "please cancel that",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "Provide information about me",
+      "intent": "UserProfile",
+      "entities": []
+    },
+    {
+      "text": "Get started",
+      "intent": "UserProfile",
+      "entities": []
+    },
+    {
+      "text": "Start",
+      "intent": "UserProfile",
+      "entities": []
+    },
+    {
+      "text": "Please start",
+      "intent": "UserProfile",
+      "entities": []
+    },
+    {
+      "text": "let's get started",
+      "intent": "UserProfile",
+      "entities": []
+    }
+  ],
+  "patterns": [],
+  "patternAnyEntities": [],
+  "prebuiltEntities": [],
+  "luis_schema_version": "3.0.0",
+  "versionId": "0.1",
+  "name": "RootDialog",
+  "desc": "",
+  "culture": "en-us"
+}

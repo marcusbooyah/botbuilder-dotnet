@@ -1,0 +1,343 @@
+{
+  "intents": [
+    {
+      "name": "Why"
+    },
+    {
+      "name": "NoName"
+    },
+    {
+      "name": "NoAge"
+    },
+    {
+      "name": "Interruption"
+    },
+    {
+      "name": "GetUserProfile"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "closedLists": [],
+  "regex_entities": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "why do you ask?",
+      "intent": "Why",
+      "entities": []
+    },
+    {
+      "text": "why do you need my name?",
+      "intent": "Why",
+      "entities": []
+    },
+    {
+      "text": "why do you need my age?",
+      "intent": "Why",
+      "entities": []
+    },
+    {
+      "text": "why do you ask for my age?",
+      "intent": "Why",
+      "entities": []
+    },
+    {
+      "text": "I'm 36 years old but why do you ask?",
+      "intent": "Why",
+      "entities": []
+    },
+    {
+      "text": "Sorry no name",
+      "intent": "NoName",
+      "entities": []
+    },
+    {
+      "text": "Sorry, I will not give you my name",
+      "intent": "NoName",
+      "entities": []
+    },
+    {
+      "text": "I'm not going to give you my name",
+      "intent": "NoName",
+      "entities": []
+    },
+    {
+      "text": "I will not give you my name",
+      "intent": "NoName",
+      "entities": []
+    },
+    {
+      "text": "No age",
+      "intent": "NoAge",
+      "entities": []
+    },
+    {
+      "text": "I will not give you my age",
+      "intent": "NoAge",
+      "entities": []
+    },
+    {
+      "text": "I do not feel comfortable giving you my age",
+      "intent": "NoAge",
+      "entities": []
+    },
+    {
+      "text": "No age for you",
+      "intent": "NoAge",
+      "entities": []
+    },
+    {
+      "text": "Sorry. I'm not giving you my age.",
+      "intent": "NoAge",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "good morning",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "how are you?",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "Please stop that",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "Cancel",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "I do not wish to do that anymore",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "I changed my mind",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "Abort",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "Don't do it",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "please cancel that",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "I need help",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "What can you do?",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "Can you please help",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "I'm not sure what I can say",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "I'm stuck",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "Help",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "reset profile",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "forget me",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "delete my profile",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "please erase everything you know about me",
+      "intent": "Interruption",
+      "entities": []
+    },
+    {
+      "text": "my name is {personName:userName}",
+      "intent": "GetUserProfile",
+      "entities": []
+    },
+    {
+      "text": "my name is john",
+      "intent": "GetUserProfile",
+      "entities": [
+        {
+          "entity": "personName",
+          "startPos": 11,
+          "endPos": 14,
+          "role": "userName"
+        }
+      ]
+    },
+    {
+      "text": "Alex",
+      "intent": "GetUserProfile",
+      "entities": [
+        {
+          "entity": "personName",
+          "startPos": 0,
+          "endPos": 3,
+          "role": "userName"
+        }
+      ]
+    },
+    {
+      "text": "35",
+      "intent": "GetUserProfile",
+      "entities": [
+        {
+          "entity": "number",
+          "startPos": 0,
+          "endPos": 1,
+          "role": "userAgeAsNum"
+        }
+      ]
+    },
+    {
+      "text": "I'm 35 years old",
+      "intent": "GetUserProfile",
+      "entities": [
+        {
+          "entity": "number",
+          "startPos": 4,
+          "endPos": 5,
+          "role": "userAgeAsNum"
+        }
+      ]
+    },
+    {
+      "text": "35",
+      "intent": "GetUserProfile",
+      "entities": [
+        {
+          "entity": "age",
+          "startPos": 0,
+          "endPos": 1,
+          "role": "userAge"
+        }
+      ]
+    },
+    {
+      "text": "I'm 42 years old",
+      "intent": "GetUserProfile",
+      "entities": [
+        {
+          "entity": "age",
+          "startPos": 4,
+          "endPos": 5,
+          "role": "userAge"
+        }
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "pattern": "My age is {age:userAge}, but why do you need it?",
+      "intent": "Why"
+    },
+    {
+      "pattern": "I'm {number:userAgeAsNum} but why do you need to know my age?",
+      "intent": "Why"
+    },
+    {
+      "pattern": "my name is {personName:userName}",
+      "intent": "GetUserProfile"
+    },
+    {
+      "pattern": "{personName:userName} is my name",
+      "intent": "GetUserProfile"
+    },
+    {
+      "pattern": "you can call me {personName:userName}",
+      "intent": "GetUserProfile"
+    },
+    {
+      "pattern": "people call me {personName:userName}",
+      "intent": "GetUserProfile"
+    },
+    {
+      "pattern": "{personName:userName}",
+      "intent": "GetUserProfile"
+    },
+    {
+      "pattern": "{age:userAge}",
+      "intent": "GetUserProfile"
+    },
+    {
+      "pattern": "{number:userAgeAsNum}",
+      "intent": "GetUserProfile"
+    }
+  ],
+  "patternAnyEntities": [],
+  "prebuiltEntities": [
+    {
+      "name": "number",
+      "roles": [
+        "userAgeAsNum"
+      ]
+    },
+    {
+      "name": "age",
+      "roles": [
+        "userAge"
+      ]
+    },
+    {
+      "name": "personName",
+      "roles": [
+        "userName"
+      ]
+    }
+  ],
+  "luis_schema_version": "3.0.0",
+  "versionId": "0.1",
+  "name": "UserProfileDialog",
+  "desc": "",
+  "culture": "en-us"
+}
