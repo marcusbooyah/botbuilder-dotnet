@@ -38,10 +38,7 @@ namespace Microsoft.BotBuilderSamples
                     {
                         Actions = new List<Dialog>()
                         {
-                            new SendActivity()
-                            {
-                                Activity = new ActivityTemplate("${@answer}"),
-                            }
+                            new SendActivity("${@answer}")
                         }
                     },
                     new OnQnAMatch()
@@ -140,7 +137,7 @@ namespace Microsoft.BotBuilderSamples
                                         EventName = AdaptiveEvents.RecognizedIntent,
                                         EventValue = "=dialog.luisResult.result"
                                     },
-                                    new GotoAction("Exit")
+                                    new BreakLoop()
                                 }
                             },
 
@@ -155,7 +152,7 @@ namespace Microsoft.BotBuilderSamples
                                         EventName = AdaptiveEvents.RecognizedIntent,
                                         EventValue = "=dialog.qnaResult.result"
                                     },
-                                    new GotoAction("Exit")
+                                    new BreakLoop()
                                 }
                             },
 
@@ -170,7 +167,7 @@ namespace Microsoft.BotBuilderSamples
                                         EventName = AdaptiveEvents.RecognizedIntent,
                                         EventValue = "=dialog.qnaResult.result"
                                     },
-                                    new GotoAction("Exit")
+                                    new BreakLoop()
                                 }
                             },
 
@@ -203,13 +200,17 @@ namespace Microsoft.BotBuilderSamples
                                     new EmitEvent()
                                     {
                                         EventName = AdaptiveEvents.RecognizedIntent,
-                                        EventValue = "=getProperty(dialog, turn.intentChoice).result"
-
-                                        //EventValue = "=dialog[turn.intentChoice].result"
+                                        EventValue = "=dialog[turn.intentChoice].result"
+                                    }
+                                }, 
+                                ElseActions = new List<Dialog>()
+                                {
+                                    new SendActivity()
+                                    {
+                                        Activity = new ActivityTemplate("Sure, no worries.")
                                     }
                                 }
-                            },
-                            new LogAction() { Id = "Exit" }
+                            }
                         }
                     },
                     new OnIntent()
