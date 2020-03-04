@@ -188,25 +188,15 @@ namespace Microsoft.Bot.Builder.LanguageGeneration
         /// <returns>Evaluate result.</returns>
         public object Evaluate(string inlineStr, object scope = null)
         {
-            if (inlineStr == null)
+            var (result, error) = ExpressionParser.Parse($"`{inlineStr}`").TryEvaluate(scope);
+            if (!string.IsNullOrWhiteSpace(error))
             {
-                throw new ArgumentException("inline string is null.");
+                throw new Exception(error);
             }
-
-            CheckErrors();
-
-            // wrap inline string with "# name and -" to align the evaluation process
-            var fakeTemplateId = Guid.NewGuid().ToString();
-            var multiLineMark = "```";
-
-            inlineStr = !inlineStr.Trim().StartsWith(multiLineMark) && inlineStr.Contains('\n')
-                   ? $"{multiLineMark}{inlineStr}{multiLineMark}" : inlineStr;
-
-            var newContent = $"# {fakeTemplateId} \r\n - {inlineStr}";
-
-            var newLG = LGParser.ParseTextWithRef(newContent, this);
-
-            return newLG.EvaluateTemplate(fakeTemplateId, scope);
+            else
+            {
+                return result;
+            }
         }
 
         /// <summary>

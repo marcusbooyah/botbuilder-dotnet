@@ -92,52 +92,6 @@ namespace Microsoft.Bot.Builder.LanguageGeneration
         }
 
         /// <summary>
-        /// Parser to turn lg content into a <see cref="LG"/> based on the original LGFile.
-        /// </summary>
-        /// <param name="content">Text content contains lg templates.</param>
-        /// <param name="lg">original LGFile.</param>
-        /// <returns>new <see cref="LG"/> entity.</returns>
-        public static LG ParseTextWithRef(string content, LG lg)
-        {
-            if (lg == null)
-            {
-                throw new ArgumentNullException(nameof(lg));
-            }
-
-            var id = "inline content";
-            var newLG = new LG(content: content, id: id, importResolver: lg.ImportResolver, options: lg.Options);
-            var diagnostics = new List<Diagnostic>();
-            try
-            {
-                var (templates, imports, invalidTemplateErrors, options) = AntlrParse(content, id);
-                newLG.Templates = templates;
-                newLG.Imports = imports;
-                newLG.Options = options;
-                diagnostics.AddRange(invalidTemplateErrors);
-
-                newLG.References = GetReferences(newLG, newLG.ImportResolver)
-                        .Union(lg.References)
-                        .Union(new List<LG> { lg })
-                        .ToList();
-
-                var semanticErrors = new StaticChecker(newLG).Check();
-                diagnostics.AddRange(semanticErrors);
-            }
-            catch (LGException ex)
-            {
-                diagnostics.AddRange(ex.Diagnostics);
-            }
-            catch (Exception err)
-            {
-                diagnostics.Add(BuildDiagnostic(err.Message, source: id));
-            }
-
-            newLG.Diagnostics = diagnostics;
-
-            return newLG;
-        }
-
-        /// <summary>
         /// Default import resolver, using relative/absolute file path to access the file content.
         /// </summary>
         /// <param name="sourceId">default is file path.</param>
