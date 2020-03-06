@@ -49,7 +49,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: '$(System.DefaultWorkingDirectory)\tests\Microsoft.Bot.Builder.TestBot\Microsoft.Bot.Builder.TestBot.csproj'
-    arguments: '--output $(System.DefaultWorkingDirectory)\tests\Microsoft.Bot.Builder.TestBot\publishedbot'
+    arguments: '-r linux-x64 --configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)\tests\Microsoft.Bot.Builder.TestBot\publishedbot'
     zipAfterPublish: false
     modifyOutputPath: false
 
@@ -82,7 +82,9 @@ steps:
   displayName: 'Git bot deployment'
 
 - powershell: |
-   $json = Get-Content '$(System.DefaultWorkingDirectory)\DirectLineCreate.json' | Out-String | ConvertFrom-Json
+   $content = Get-Content '$(System.DefaultWorkingDirectory)\DirectLineCreate.json' | Out-String
+   Write-Host $content
+   $json = $content | ConvertFrom-Json
    $key = $json.properties.properties.sites.key
    echo "##vso[task.setvariable variable=DIRECTLINE;]$key"
    echo "##vso[task.setvariable variable=BOTID;]$(LinuxTestBotBotName)"
