@@ -8,6 +8,9 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Tests\GeneratorTests\sandwich\en-us\sandwich-Bread.en-us.lg" />
     <None Remove="Tests\GeneratorTests\sandwich\en-us\sandwich-BreadEntity.en-us.lg" />

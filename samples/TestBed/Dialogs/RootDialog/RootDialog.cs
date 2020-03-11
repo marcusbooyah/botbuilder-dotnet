@@ -17,12 +17,12 @@ namespace Microsoft.BotBuilderSamples
 {
     public class RootDialog : ComponentDialog
     {
-        private LGFile _lgFile;
+        private Templates _lgFile;
 
         public RootDialog()
             : base(nameof(RootDialog))
         {
-            _lgFile = LGParser.ParseFile(Path.Combine(".", "Dialogs", "RootDialog", "RootDialog.lg"));
+            _lgFile = Templates.ParseFile(Path.Combine(".", "Dialogs", "RootDialog", "RootDialog.lg"));
             var rootDialog = new AdaptiveDialog(nameof(AdaptiveDialog))
             {
                 Generator = new TemplateEngineLanguageGenerator(_lgFile),

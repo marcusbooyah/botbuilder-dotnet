@@ -15,21 +15,67 @@ namespace Microsoft.BotBuilderSamples
 {
     public class RootDialogQnA : ComponentDialog
     {
-        private LGFile _lgFile;
+        private Templates _lgTemplates;
 
         public RootDialogQnA()
             : base(nameof(RootDialog))
         {
-            _lgFile = LGParser.ParseFile(Path.Combine(".", "Dialogs", "RootDialog - QnA", "RootDialog.lg"));
+            var childDialog = new AdaptiveDialog("child")
+            {
+                Recognizer = new RegexRecognizer()
+                {
+                    Intents = new List<IntentPattern>()
+                    {
+                        new IntentPattern()
+                        {
+                            Intent = "cancel",
+                            Pattern = "cancel"
+                        }
+                    }
+                },
+                Triggers = new List<OnCondition>()
+                {
+                    new OnBeginDialog()
+                    {
+                        Actions = new List<Dialog>()
+                        {
+                            new TextInput()
+                            {
+                                Prompt = new ActivityTemplate("what is your name?"),
+                                Property = "user.name"
+                            },
+                            new SendActivity("I have ${user.name}")
+                        }
+                    },
+                    new OnIntent()
+                    {
+                        Intent = "cancel",
+                        Actions = new List<Dialog>()
+                        {
+                            new CancelAllDialogs()
+                        }
+                    }
+                }
+            };
+
+            _lgTemplates = Templates.ParseFile(Path.Combine(".", "Dialogs", "RootDialog - QnA", "RootDialog.lg"));
             var rootDialog = new AdaptiveDialog(nameof(AdaptiveDialog))
             {
-                Generator = new TemplateEngineLanguageGenerator(_lgFile),
+                Generator = new TemplateEngineLanguageGenerator(_lgTemplates),
 
                 Recognizer = MultiRecognizer(),
 
                 // Recognizer = MultiRecognizer(),
                 Triggers = new List<OnCondition>()
                 {
+                    new OnDialogEvent()
+                    {
+                        Event = "cancel",
+                        Actions = new List<Dialog>()
+                        {
+                            new SendActivity("Ok")
+                        }
+                    },
                     new OnConversationUpdateActivity()
                     {
                         Actions = WelcomeUserAction()
@@ -249,6 +295,7 @@ namespace Microsoft.BotBuilderSamples
 
             // Add named dialogs to the DialogSet. These names are saved in the dialog state.
             AddDialog(rootDialog);
+            AddDialog(childDialog);
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(AdaptiveDialog);
@@ -283,7 +330,8 @@ namespace Microsoft.BotBuilderSamples
                             Actions = new List<Dialog>()
                             {
                                 new SendActivity("I have ${coalesce(settings.key, 'error')}"),
-                                new SendActivity("${WelcomeUser()}")
+                                new SendActivity("${WelcomeUser()}"),
+                                new BeginDialog("child")
                             }
                         }
                     }
